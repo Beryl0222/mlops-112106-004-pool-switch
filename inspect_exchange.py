@@ -20,12 +20,12 @@ def inspect(path: Path) -> dict:
 
 def validate(data: dict) -> None:
     for layer, shape in data["layers"].items():
-            for owner, bounds in data["primary"][layer].items():
-                y0, y1, x0, x1 = bounds
-                tile = data["features"][layer][owner]
-                assert 0 <= y0 < y1 <= shape["shape"][0] and 0 <= x0 < x1 <= shape["shape"][1]
-                assert len(tile) == y1-y0 and all(len(line) == x1-x0 for line in tile)
-            assert list(np.shape(data["pool_dy"][layer])) == shape["grid"]
+        for owner, bounds in data["primary"][layer].items():
+            y0, y1, x0, x1 = bounds
+            tile = data["features"][layer][owner]
+            assert 0 <= y0 < y1 <= shape["shape"][0] and 0 <= x0 < x1 <= shape["shape"][1]
+            assert len(tile) == y1-y0 and all(len(line) == x1-x0 for line in tile)
+        assert list(np.shape(data["pool_dy"][layer])) == shape["grid"]
 
 
 def main() -> None:
